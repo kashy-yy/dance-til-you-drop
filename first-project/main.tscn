@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://d32vlgw68dqe2"]
 
+[ext_resource type="Texture2D" uid="uid://bhdaly80uivj4" path="res://assets/sprites/red-square-md.png" id="1_ig7tw"]
+
 [node name="Node2D" type="Node2D" unique_id=374591209]
+
+[node name="Boss" type="Sprite2D" parent="." unique_id=167549397]
+position = Vector2(-2.9999962, -1961)
+scale = Vector2(3.6120834, 3.7691672)
+texture = ExtResource("1_ig7tw")
