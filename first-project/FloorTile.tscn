@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ct7o0pmw1nmak"]
+
+[ext_resource type="Script" uid="uid://cb0wxnsw0dkm4" path="res://FloorTile.cs" id="1_puq3c"]
+
+[node name="FloorTile" type="Node2D" unique_id=1388401766]
+script = ExtResource("1_puq3c")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=242733352]
+offset_left = 29.0
+offset_top = 706.0
+offset_right = 325.0
+offset_bottom = 1004.0
