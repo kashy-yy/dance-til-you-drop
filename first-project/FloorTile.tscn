@@ -6,7 +6,7 @@
 script = ExtResource("1_puq3c")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=242733352]
-offset_left = 29.0
-offset_top = 706.0
-offset_right = 325.0
-offset_bottom = 1004.0
+offset_left = 17.0
+offset_top = 365.0
+offset_right = 279.0
+offset_bottom = 519.0

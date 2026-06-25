@@ -13,7 +13,7 @@ public partial class DanceFloor : Node2D
 	private FloorTile[,] tiles = new FloorTile[Rows, Columns];
 	
 	//Size of each tile in pixels
-	public Vector2 tileSize = new Vector2(64, 56);
+	public Vector2 tileSize = new Vector2(125, 100);
 	
 	
 	// Called when the node enters the scene tree for the first time.
