@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://6uc8b5g8m6j5"]
 
 [ext_resource type="Script" uid="uid://0v4vd3r8xjqc" path="res://DanceFloor.cs" id="1_t1xv8"]
-[ext_resource type="PackedScene" uid="uid://ct7o0pmw1nmak" path="res://FloorTile.tscn" id="2_3btrf"]
 
 [node name="DanceFloor" type="Node2D" unique_id=763538885]
 script = ExtResource("1_t1xv8")
-
-[node name="FloorTile" parent="." unique_id=1388401766 instance=ExtResource("2_3btrf")]
