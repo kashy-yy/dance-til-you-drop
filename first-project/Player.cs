@@ -7,7 +7,6 @@ public partial class Player : Node2D
 	private int currentCol;
 	
 	private Vector2 tileSize;
-	private Vector2 gridStart;
 	
 	private const int Rows = 9;
 	private const int Columns = 10;
@@ -15,10 +14,10 @@ public partial class Player : Node2D
 	private ColorRect rect;
 	
 	// DanceFloor gives the player the grid information
-	public void SetGridData(Vector2 tileSize, Vector2 gridStart, int startRow, int startCol)
+	public void SetGridData(Vector2 tileSize, int startRow, int startCol)
 	{
 		this.tileSize = tileSize;
-		this.gridStart = gridStart;
+		
 		currentRow = startRow;
 		currentCol = startCol;
 		
@@ -72,8 +71,8 @@ public partial class Player : Node2D
 		float offsetY = (tileSize.Y - rect.Size.Y) / 2;
 		
 		Position = new Vector2(
-			gridStart.X + currentCol * tileSize.X + offsetX,
-			gridStart.Y + currentRow * tileSize.Y + offsetY
+			currentCol * tileSize.X + offsetX,
+			currentRow * tileSize.Y + offsetY
 		);
 	}
 }
