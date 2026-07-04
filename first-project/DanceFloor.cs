@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class DanceFloor : Node2D
 {
 	private PackedScene floorTileScene = GD.Load<PackedScene>("res://FloorTile.tscn");
 	private PackedScene playerScene = GD.Load<PackedScene>("res://Player.tscn");
+	
+	// Timer
+	private Timer colourTimer;
 	
 	// Generates a random number for the tiles colour
 	private readonly RandomNumberGenerator rng = new RandomNumberGenerator();
@@ -22,6 +26,16 @@ public partial class DanceFloor : Node2D
 	// Stores the colour index of each tile
 	private int[,] colourGrid = new int[Rows, Columns];
 	
+	// Stores the colours the floor is transitioning to
+	private Color[,] nextColours = new Color[Rows,Columns];
+	
+	//Stores the positions of the tiles that still need updating
+	private List<Vector2I> tilesToUpdate = new List<Vector2I>();
+	
+	// Animation variables
+	private const float AnimationSpeed = 0.1f;
+	private const int TilesPerTick = 8;
+	
 	// Array of possible tile colours
 	private readonly Color[] danceColours =
 	{
@@ -35,8 +49,17 @@ public partial class DanceFloor : Node2D
 	public override void _Ready()
 	{
 		rng.Randomize();
+		
 		GenerateFloor();
 		SpawnPlayer();
+		
+		GenerateNextColours();
+		
+		colourTimer = GetNode<Timer>("ColourTimer");
+		colourTimer.Timeout += OnColourTimerTimeout; 
+		
+		colourTimer.WaitTime = AnimationSpeed;
+		colourTimer.Start();
 	}
 	
 	// Creates the dance floor grid
@@ -102,6 +125,68 @@ public partial class DanceFloor : Node2D
 		
 		// return the actual colour from the colour array
 		return danceColours[colourIndex];
+	}
+	
+	private void GenerateNextColours()
+	{
+		// Reset colour grid so ChooseColour starts fresh
+		colourGrid = new int[Rows, Columns];
+		
+		// Clear any previous tile positions 
+		tilesToUpdate.Clear();
+		
+		for (int row = 0; row<Rows; row++)
+		{
+			for (int col=0; col<Columns; col++)
+			{
+				// Generate the colour for this tile
+				nextColours[row,col] = ChooseColour(row,col);
+				
+				//This tile needs updating
+				tilesToUpdate.Add(new Vector2I(col,row));
+			}
+		}
+		
+		ShuffleTileList();
+	}
+	
+	//Randomises the order the tiles will update
+	//Fisher-Yates shuffle
+	private void ShuffleTileList()
+	{
+		for(int i=tilesToUpdate.Count-1; i>0; i--)
+		{
+			int j = rng.RandiRange(0,i);
+			
+			Vector2I temp = tilesToUpdate[i];
+			tilesToUpdate[i] = tilesToUpdate[j];
+			tilesToUpdate[j] = temp;
+		}
+	}
+	
+	private void AnimateFloor()
+	{
+		// If every tile has been updated, generate another pattern
+		if (tilesToUpdate.Count == 0)
+		{
+			GenerateNextColours();
+			return;
+		}
+		
+		for (int i=0; i<TilesPerTick && tilesToUpdate.Count>0; i++)
+		{
+			Vector2I tilePos = tilesToUpdate[0];
+			tilesToUpdate.RemoveAt(0);
+			
+			tiles[tilePos.Y, tilePos.X].SetColour(
+				nextColours[tilePos.Y, tilePos.X]
+			);
+		}
+	}
+	
+	private void OnColourTimerTimeout()
+	{
+			AnimateFloor();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
