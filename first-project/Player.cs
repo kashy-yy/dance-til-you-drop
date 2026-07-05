@@ -13,6 +13,21 @@ public partial class Player : Node2D
 	
 	private ColorRect rect;
 	
+	// Delay before repeated movement starts when holding a key
+	private const float InitialRepeatDelay = 0.30f;
+	
+	// Time between moves when holding a key
+	private const float RepeatDelay = 0.12f;
+	
+	// Stores the direction currently being held
+	private Vector2I heldDirection = Vector2I.Zero;
+	
+	// Timer used for repeated movement
+	private float moveTimer = 0f;
+	
+	// True once the initial delay has passed
+	private bool repeating = false;
+	
 	// DanceFloor gives the player the grid information
 	public void SetGridData(Vector2 tileSize, int startRow, int startCol)
 	{
@@ -36,14 +51,66 @@ public partial class Player : Node2D
 	
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("ui_right"))
-			Move(0,1);
-		if (Input.IsActionJustPressed("ui_left"))
-			Move(0,-1);
-		if(Input.IsActionJustPressed("ui_up"))
-			Move(-1,0);
-		if(Input.IsActionJustPressed("ui_down"))
-			Move(1,0);
+		Vector2I direction = GetHeldDirection();
+		
+		// No key is being held
+		if (direction == Vector2I.Zero)
+		{
+			heldDirection = Vector2I.Zero;
+			moveTimer= 0;
+			repeating = false;
+			return;
+		}
+		
+		// A new key has just been pressed
+		if (direction != heldDirection)
+		{
+			heldDirection = direction;
+			moveTimer = 0;
+			repeating = false;
+			
+			Move(direction.Y, direction.X);
+			return;
+		}
+		
+		moveTimer += (float)delta;
+		
+		// Wait before repeating
+		if (!repeating)
+		{
+			if (moveTimer >= InitialRepeatDelay)
+			{
+				Move(direction.Y, direction.X);
+				moveTimer = 0;
+				repeating = true;
+			}
+		}
+		else
+		{
+			if (moveTimer >RepeatDelay)
+			{
+				Move(direction.Y, direction.X);
+				moveTimer = 0;
+			}
+		}
+	}
+	
+	// Returns the direction of the key currently being held
+	private Vector2I GetHeldDirection()
+	{
+		if (Input.IsActionPressed("ui_right"))
+			return Vector2I.Right;
+		
+		if (Input.IsActionPressed("ui_left"))
+			return Vector2I.Left;
+			
+		if (Input.IsActionPressed("ui_up"))
+			return Vector2I.Up;
+		
+		if (Input.IsActionPressed("ui_down"))
+			return Vector2I.Down;
+			
+		return Vector2I.Zero;
 	}
 	
 	private void Move(int rowChange, int colChange)
