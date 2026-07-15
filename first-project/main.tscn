@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d32vlgw68dqe2"]
 
-[ext_resource type="Texture2D" uid="uid://bhdaly80uivj4" path="res://assets/sprites/red-square-md.png" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://6uc8b5g8m6j5" path="res://DanceFloor.tscn" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://bgj3j28s6nxc0" path="res://DanceDisplay.tscn" id="2_r0du0"]
 
-[node name="Node2D" type="Node2D" unique_id=374591209]
+[node name="Main" type="Node2D" unique_id=1385843476]
 
-[node name="Boss" type="Sprite2D" parent="." unique_id=167549397]
-position = Vector2(-2.9999962, -1961)
-scale = Vector2(3.6120834, 3.7691672)
-texture = ExtResource("1_ig7tw")
+[node name="DanceFloor" parent="." unique_id=763538885 instance=ExtResource("1_uu6xs")]
+
+[node name="DanceDisplay" parent="." unique_id=991627235 instance=ExtResource("2_r0du0")]

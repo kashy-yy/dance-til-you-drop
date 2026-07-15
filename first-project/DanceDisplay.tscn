@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bgj3j28s6nxc0"]
+
+[ext_resource type="Script" uid="uid://5os4v8hw5t1u" path="res://DanceDisplay.cs" id="1_tjryj"]
+
+[node name="DanceDisplay" type="Node2D" unique_id=991627235]
+script = ExtResource("1_tjryj")
+
+[node name="Display" type="Node2D" parent="." unique_id=1320115065]
+position = Vector2(500, 20)

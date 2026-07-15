@@ -14,7 +14,7 @@ public partial class Player : Node2D
 	private ColorRect rect;
 	
 	// Delay before repeated movement starts when holding a key
-	private const float InitialRepeatDelay = 0.30f;
+	private const float InitialRepeatDelay = 0.50f;
 	
 	// Time between moves when holding a key
 	private const float RepeatDelay = 0.12f;

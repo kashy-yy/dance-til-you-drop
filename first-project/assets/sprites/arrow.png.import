@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhdaly80uivj4"
-path="res://.godot/imported/red-square-md.png-65c9953f77bd5edf5a599321655620f5.ctex"
+uid="uid://c1o4o674x3032"
+path="res://.godot/imported/arrow.png-18e607c3398c94c410f88abf48695716.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/red-square-md.png"
-dest_files=["res://.godot/imported/red-square-md.png-65c9953f77bd5edf5a599321655620f5.ctex"]
+source_file="res://assets/sprites/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-18e607c3398c94c410f88abf48695716.ctex"]
 
 [params]
 
