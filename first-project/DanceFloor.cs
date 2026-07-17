@@ -7,6 +7,9 @@ public partial class DanceFloor : Node2D
 	private PackedScene floorTileScene = GD.Load<PackedScene>("res://FloorTile.tscn");
 	private PackedScene playerScene = GD.Load<PackedScene>("res://Player.tscn");
 	
+	//Player
+	private Player player;
+	
 	// Timer
 	private Timer colourTimer;
 	
@@ -93,11 +96,16 @@ public partial class DanceFloor : Node2D
 	
 	private void SpawnPlayer()
 	{
-		Player player = playerScene.Instantiate<Player>();
+		player = playerScene.Instantiate<Player>();
 		AddChild(player);
 		
 		// Start player on tile row 0, column 0
 		player.SetGridData(tileSize, 0, 0);
+	}
+	
+	public Player GetPlayer()
+	{
+		return player;
 	}
 	
 	// Chooses a random colour for a tile while making sure it

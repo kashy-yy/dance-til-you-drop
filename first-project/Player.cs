@@ -3,6 +3,9 @@ using System;
 
 public partial class Player : Node2D
 {
+	// Triggered everytime the player successfully moves
+	public event Action<MoveDirection> MovePerformed;
+	
 	private int currentRow;
 	private int currentCol;
 	
@@ -126,6 +129,20 @@ public partial class Player : Node2D
 		currentCol = newCol;
 		
 		UpdatePosition();
+		
+		//Tell any listeners
+		MovePerformed?.Invoke(RowColToDirection(rowChange, colChange));
+	}
+	
+	private MoveDirection RowColToDirection(int rowChange, int colChange)
+	{
+		if (rowChange == -1)
+			return MoveDirection.Up;
+		if (rowChange == 1)
+			return MoveDirection.Down;
+		if (colChange == -1)
+			return MoveDirection.Left;
+		return MoveDirection.Right;
 	}
 	
 	private void UpdatePosition()
