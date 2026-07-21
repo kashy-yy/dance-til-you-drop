@@ -116,6 +116,12 @@ public partial class Player : Node2D
 		return Vector2I.Zero;
 	}
 	
+	//Returns player's position on the floor
+	public Vector2I GetGridPosition()
+	{
+		return new Vector2I(currentRow, currentCol);
+	}
+	
 	private void Move(int rowChange, int colChange)
 	{
 		int newRow = currentRow + rowChange;

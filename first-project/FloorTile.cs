@@ -4,6 +4,7 @@ using System;
 public partial class FloorTile : Node2D
 {
 	private ColorRect rect;
+	private ColorRect highlightRect;
 	
 	// Stores the current state of the tile.
 	// Other classes can read the tile's state, but only FloorTile can change it.
@@ -14,16 +15,27 @@ public partial class FloorTile : Node2D
 	public override void _Ready()
 	{
 		rect = GetNode<ColorRect>("ColorRect");
+		highlightRect = GetNode<ColorRect>("HighlightRect");
+		highlightRect.Visible = false;
 		UpdateVisual();
+	}
+	
+	private void CacheNodes()
+	{
+		if (rect == null)
+			rect = GetNode<ColorRect>("ColorRect");
+			
+		if (highlightRect == null)
+			highlightRect = GetNode<ColorRect>("HighlightRect");
 	}
 	
 	// Sets the size of this tile by resizing its ColorRect child.
 	public void SetTileSize(Vector2 size)
 	{
-		if (rect == null)
-			rect = GetNode<ColorRect>("ColorRect");
-			
+		CacheNodes();
+		
 		rect.Size = size;
+		highlightRect.Size = size;
 	}
 	
 	// Changes the tile's state and updates its colour
@@ -37,7 +49,7 @@ public partial class FloorTile : Node2D
 	{
 		if (rect == null)
 			rect = GetNode<ColorRect>("ColorRect");
-			
+		
 		rect.Color = colour;
 	}
 	
@@ -60,6 +72,12 @@ public partial class FloorTile : Node2D
 				rect.Color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 				break;
 		}
+	}
+	
+	//Highlight tiles
+	public void SetHighlight(bool highlighted)
+	{
+		highlightRect.Visible = highlighted;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

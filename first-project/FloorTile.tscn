@@ -10,3 +10,11 @@ offset_left = 17.0
 offset_top = 365.0
 offset_right = 279.0
 offset_bottom = 519.0
+
+[node name="HighlightRect" type="ColorRect" parent="." unique_id=705880555]
+z_index = 1
+offset_left = 17.0
+offset_top = 365.0
+offset_right = 57.0
+offset_bottom = 492.0
+color = Color(1, 1, 1, 0.91764706)

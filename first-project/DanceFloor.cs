@@ -35,6 +35,9 @@ public partial class DanceFloor : Node2D
 	//Stores the positions of the tiles that still need updating
 	private List<Vector2I> tilesToUpdate = new List<Vector2I>();
 	
+	// Stores highlighted tiles
+	private List<Vector2I> highlightedTiles = new();
+	
 	// Animation variables
 	private const float AnimationSpeed = 0.1f;
 	private const int TilesPerTick = 8;
@@ -196,7 +199,38 @@ public partial class DanceFloor : Node2D
 	{
 			AnimateFloor();
 	}
-
+	
+	// Highlights tiles
+	public void HighlightTile(int row, int col)
+	{
+		tiles[row,col].SetHighlight(true);
+		
+		Vector2I pos = new Vector2I(row,col);
+		
+		if(!highlightedTiles.Contains(pos))
+		{
+			highlightedTiles.Add(pos);
+		}
+	}
+	
+	public void ToggleHighlights(bool visible)
+	{
+		foreach (Vector2I pos in highlightedTiles)
+		{
+			tiles[pos.X, pos.Y].SetHighlight(visible);
+		}
+	}
+	
+	//unhighlight tiles
+	public void ClearHighlights()
+	{
+		foreach (Vector2I pos in highlightedTiles)
+		{
+			tiles[pos.X,pos.Y].SetHighlight(false);
+		}
+		highlightedTiles.Clear();
+	}
+	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
