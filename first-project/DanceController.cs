@@ -28,7 +28,7 @@ public partial class DanceController:Node2D
 	{
 		// Find the floor and display
 		danceFloor= GetNode<DanceFloor>("../DanceFloor");
-		danceDisplay = GetNode<DanceDisplay>("../DanceDisplay");
+		danceDisplay = GetNode<DanceDisplay>("../TVScreen/DanceDisplay");
 		
 		//Get the player DanceFloor created
 		player = danceFloor.GetPlayer();

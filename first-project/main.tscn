@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://d32vlgw68dqe2"]
 
 [ext_resource type="PackedScene" uid="uid://6uc8b5g8m6j5" path="res://DanceFloor.tscn" id="1_uu6xs"]
-[ext_resource type="PackedScene" uid="uid://bgj3j28s6nxc0" path="res://DanceDisplay.tscn" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://bs0341rhou07s" path="res://TVScreen.tscn" id="2_r0du0"]
 [ext_resource type="Script" uid="uid://bjga7sa2lsa0x" path="res://DanceController.cs" id="3_r0du0"]
 
 [node name="Main" type="Node2D" unique_id=1385843476]
 
 [node name="DanceFloor" parent="." unique_id=763538885 instance=ExtResource("1_uu6xs")]
 
-[node name="DanceDisplay" parent="." unique_id=991627235 instance=ExtResource("2_r0du0")]
+[node name="TVScreen" parent="." unique_id=1314128875 instance=ExtResource("2_r0du0")]
 
 [node name="DanceController" type="Node2D" parent="." unique_id=323605558]
 script = ExtResource("3_r0du0")
